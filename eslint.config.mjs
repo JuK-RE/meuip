@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // clone do projeto juk.re, usado só como referência de componentes
+    "juk.re/**",
   ]),
 ]);
 

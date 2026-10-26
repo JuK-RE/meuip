@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
     agentFeedback: true,
   },
   cacheComponents: true,
+  async redirects() {
+    // a antiga página /api virou /developers
+    return [{ source: "/:lang(pt|en|es|fr)/api", destination: "/:lang/developers", permanent: true }];
+  },
   partialPrefetching: true,
   turbopack: {
     rules: {

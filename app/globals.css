@@ -1,26 +1,308 @@
 @import "tailwindcss";
 
+/* Identidade JUK.re (mesma base do ddns-ui) com o laranja trocado por um verde claro.
+   --accent é o preenchimento (botões, destaques) e leva texto escuro por cima;
+   --accent-ink é o verde legível como texto/ícone sobre a superfície. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --surface: #ffffff;
+  --surface-soft: #fafafa;
+  --surface-hover: #f5f5f5;
+  --ink-strong: #202020;
+  --ink: #242424;
+  --ink-muted: #626262;
+  --ink-dim: #8a8a8a;
+  --line: #dedede;
+  --line-pill: #d6d6d6;
+  --line-soft: #ebebeb;
+
+  --accent: #86efac;
+  --accent-hover: #6ee7a0;
+  --accent-fg: #0c2a17;
+  --accent-ink: #15803d;
+  --accent-tint: #effcf3;
+  --accent-tint-line: #c6efd4;
+  --focus: rgba(74, 222, 128, 0.4);
+
+  --ok-bg: #e6f6ec;
+  --ok-fg: #16794a;
+  --ok-line: #b7e2c8;
+  --warn-bg: #fdf3d8;
+  --warn-fg: #9a6700;
+  --warn-line: #f4dba0;
+  --bad-bg: #fdeceb;
+  --bad-fg: #b42318;
+  --bad-line: #f0c7c2;
+
+  --shadow: 0 1px 2px rgba(29, 29, 27, 0.04), 0 18px 44px -18px rgba(29, 29, 27, 0.18);
+
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Tema escuro: segue o sistema, a menos que o usuário tenha escolhido (data-theme). */
+:root[data-theme="dark"] {
+  --surface: oklch(0.155 0.011 285);
+  --surface-soft: oklch(0.125 0.01 285);
+  --surface-hover: oklch(0.205 0.014 285);
+  --ink-strong: oklch(0.96 0.006 285);
+  --ink: oklch(0.92 0.01 285);
+  --ink-muted: oklch(0.72 0.018 285);
+  --ink-dim: oklch(0.6 0.022 285);
+  --line: oklch(0.3 0.018 285);
+  --line-pill: oklch(0.36 0.02 285);
+  --line-soft: oklch(0.25 0.016 285);
+
+  --accent-ink: #86efac;
+  --accent-tint: rgba(134, 239, 172, 0.1);
+  --accent-tint-line: rgba(134, 239, 172, 0.28);
+  --focus: rgba(134, 239, 172, 0.35);
+
+  --ok-bg: rgba(74, 222, 128, 0.14);
+  --ok-fg: #4ade80;
+  --ok-line: rgba(74, 222, 128, 0.32);
+  --warn-bg: rgba(251, 191, 36, 0.14);
+  --warn-fg: #fbbf24;
+  --warn-line: rgba(251, 191, 36, 0.32);
+  --bad-bg: rgba(248, 113, 113, 0.14);
+  --bad-fg: #f87171;
+  --bad-line: rgba(248, 113, 113, 0.32);
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 18px 44px -18px rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --surface: oklch(0.155 0.011 285);
+    --surface-soft: oklch(0.125 0.01 285);
+    --surface-hover: oklch(0.205 0.014 285);
+    --ink-strong: oklch(0.96 0.006 285);
+    --ink: oklch(0.92 0.01 285);
+    --ink-muted: oklch(0.72 0.018 285);
+    --ink-dim: oklch(0.6 0.022 285);
+    --line: oklch(0.3 0.018 285);
+    --line-pill: oklch(0.36 0.02 285);
+    --line-soft: oklch(0.25 0.016 285);
+
+    --accent-ink: #86efac;
+    --accent-tint: rgba(134, 239, 172, 0.1);
+    --accent-tint-line: rgba(134, 239, 172, 0.28);
+    --focus: rgba(134, 239, 172, 0.35);
+
+    --ok-bg: rgba(74, 222, 128, 0.14);
+    --ok-fg: #4ade80;
+    --ok-line: rgba(74, 222, 128, 0.32);
+    --warn-bg: rgba(251, 191, 36, 0.14);
+    --warn-fg: #fbbf24;
+    --warn-line: rgba(251, 191, 36, 0.32);
+    --bad-bg: rgba(248, 113, 113, 0.14);
+    --bad-fg: #f87171;
+    --bad-line: rgba(248, 113, 113, 0.32);
+
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 18px 44px -18px rgba(0, 0, 0, 0.55);
+    color-scheme: dark;
   }
 }
 
+@theme inline {
+  --color-surface: var(--surface);
+  --color-soft: var(--surface-soft);
+  --color-hover: var(--surface-hover);
+  --color-strong: var(--ink-strong);
+  --color-ink: var(--ink);
+  --color-muted: var(--ink-muted);
+  --color-dim: var(--ink-dim);
+  --color-line: var(--line);
+  --color-pill: var(--line-pill);
+  --color-hair: var(--line-soft);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-ink: var(--accent-ink);
+  --color-tint: var(--accent-tint);
+  --color-tint-line: var(--accent-tint-line);
+  --color-ok: var(--ok-fg);
+  --color-ok-bg: var(--ok-bg);
+  --color-ok-line: var(--ok-line);
+  --color-warn: var(--warn-fg);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-line: var(--warn-line);
+  --color-bad: var(--bad-fg);
+  --color-bad-bg: var(--bad-bg);
+  --color-bad-line: var(--bad-line);
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --shadow-card: var(--shadow);
+  --color-term: var(--term-bg);
+  --color-term-bar: var(--term-bar);
+  --color-term-fg: var(--term-fg);
+  --color-term-dim: var(--term-dim);
+  --color-term-line: var(--term-line);
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface);
+  color: var(--ink-muted);
+  font-family: var(--font-sans);
+  letter-spacing: 0.01em;
+}
+
+/* Anel de foco para teclado. Fica na camada base para as utilidades do Tailwind (focus:outline-none) poderem sobrescrever. */
+@layer base {
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+/* Ícone do alternador de tema: mostra o sol no claro e a lua no escuro. */
+.theme-moon {
+  display: none;
+}
+:root[data-theme="dark"] .theme-sun {
+  display: none;
+}
+:root[data-theme="dark"] .theme-moon {
+  display: block;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-sun {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .theme-moon {
+    display: block;
+  }
+}
+
+/* Mapa do OpenStreetMap: no tema escuro ele é invertido para não ofuscar. */
+:root[data-theme="dark"] .map-embed {
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.8);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .map-embed {
+    filter: invert(0.92) hue-rotate(180deg) saturate(0.8);
+  }
+}
+
+/* Cores do realce de sintaxe: os blocos de código são escuros nos dois temas. */
+.tok-string { color: var(--t-str, #86efac); }
+.tok-comment { color: var(--t-com, #6f9580); font-style: italic; }
+.tok-number { color: var(--t-num, #fcd34d); }
+.tok-keyword { color: var(--t-kw, #7dd3fc); }
+
+/*
+ * Página Developers: acompanha o tema do site, só que com cara de terminal do Windows e em azul.
+ * Tema claro vira PowerShell (fundo azul) e tema escuro vira CMD (fundo preto). Quando o usuário
+ * troca o tema, a página inteira troca junto. Tudo em CSS, então não pisca na primeira pintura.
+ */
+.dev-page {
+  color-scheme: light;
+  --surface: #ffffff;
+  --surface-soft: #f3f7ff;
+  --surface-hover: #e9f0ff;
+  --ink-strong: #0b1b3a;
+  --ink: #16264a;
+  --ink-muted: #4b5c80;
+  --ink-dim: #6b7ca0;
+  --line: #d3def5;
+  --line-pill: #c2d1f0;
+  --line-soft: #e2eafa;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-fg: #ffffff;
+  --accent-ink: #1d4ed8;
+  --accent-tint: #eaf1ff;
+  --accent-tint-line: #bcd2fb;
+  --focus: rgba(37, 99, 235, 0.35);
+  --shadow: 0 1px 2px rgba(11, 27, 58, 0.05), 0 18px 44px -18px rgba(11, 27, 58, 0.25);
+  --term-bg: #012456;
+  --term-bar: #0f3c7d;
+  --term-fg: #f2f2f2;
+  --term-dim: #8fb0e0;
+  --term-line: rgba(255, 255, 255, 0.18);
+  --t-str: #61d6d6;
+  --t-com: #7fc27f;
+  --t-num: #f9f1a5;
+  --t-kw: #3be477;
+  background: var(--surface-soft);
+}
+:root[data-theme="dark"] .dev-page {
+  color-scheme: dark;
+  --surface: #0a0e14;
+  --surface-soft: #0d131b;
+  --surface-hover: #151e2a;
+  --ink-strong: #f1f5fb;
+  --ink: #dbe4f2;
+  --ink-muted: #9fb0c8;
+  --ink-dim: #7d8fa8;
+  --line: #1e2b3c;
+  --line-pill: #2b3b52;
+  --line-soft: #172233;
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --accent-fg: #0b1b3a;
+  --accent-ink: #7db4fb;
+  --accent-tint: rgba(96, 165, 250, 0.12);
+  --accent-tint-line: rgba(96, 165, 250, 0.32);
+  --focus: rgba(96, 165, 250, 0.4);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 18px 44px -18px rgba(0, 0, 0, 0.7);
+  --term-bg: #0c0c0c;
+  --term-bar: #1f1f1f;
+  --term-fg: #cccccc;
+  --term-dim: #8a8a8a;
+  --term-line: rgba(255, 255, 255, 0.16);
+  --t-str: #3a96dd;
+  --t-com: #767676;
+  --t-num: #c19c00;
+  --t-kw: #16c60c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dev-page {
+    color-scheme: dark;
+    --surface: #0a0e14;
+    --surface-soft: #0d131b;
+    --surface-hover: #151e2a;
+    --ink-strong: #f1f5fb;
+    --ink: #dbe4f2;
+    --ink-muted: #9fb0c8;
+    --ink-dim: #7d8fa8;
+    --line: #1e2b3c;
+    --line-pill: #2b3b52;
+    --line-soft: #172233;
+    --accent: #60a5fa;
+    --accent-hover: #93c5fd;
+    --accent-fg: #0b1b3a;
+    --accent-ink: #7db4fb;
+    --accent-tint: rgba(96, 165, 250, 0.12);
+    --accent-tint-line: rgba(96, 165, 250, 0.32);
+    --focus: rgba(96, 165, 250, 0.4);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 18px 44px -18px rgba(0, 0, 0, 0.7);
+    --term-bg: #0c0c0c;
+    --term-bar: #1f1f1f;
+    --term-fg: #cccccc;
+    --term-dim: #8a8a8a;
+    --term-line: rgba(255, 255, 255, 0.16);
+    --t-str: #3a96dd;
+    --t-com: #767676;
+    --t-num: #c19c00;
+    --t-kw: #16c60c;
+  }
+}
+/* textos que mudam conforme o terminal (prompt, título da janela) */
+.dev-page .only-cmd { display: none; }
+:root[data-theme="dark"] .dev-page .only-cmd { display: inline; }
+:root[data-theme="dark"] .dev-page .only-ps { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dev-page .only-cmd { display: inline; }
+  :root:not([data-theme="light"]) .dev-page .only-ps { display: none; }
 }

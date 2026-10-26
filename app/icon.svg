@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 349 348" fill="none">
+  <title>Meu IP</title>
+  <style>
+    rect { fill: #15803d; }
+    .light { opacity: 0.45; }
+    @media (prefers-color-scheme: dark) {
+      rect { fill: #86efac; }
+    }
+  </style>
+  <rect x="165.564" y="0" width="120" height="50.1099" transform="rotate(42.1729 165.564 0)"/>
+  <rect class="light" x="118.642" y="51.7971" width="120" height="50.1099" transform="rotate(42.1729 118.642 51.7971)"/>
+  <rect x="169.493" y="173.497" width="120" height="50.1099" transform="rotate(132.13 169.493 173.497)"/>
+  <rect class="light" x="117.66" y="126.614" width="120" height="50.1099" transform="rotate(132.13 117.66 126.614)"/>
+  <rect x="173.818" y="178" width="120" height="50.1099" transform="rotate(41.694 173.818 178)"/>
+  <rect class="light" x="127.331" y="230.188" width="120" height="50.1099" transform="rotate(41.694 127.331 230.188)"/>
+  <rect x="348.476" y="164.324" width="120" height="50.1099" transform="rotate(132.018 348.476 164.324)"/>
+  <rect class="light" x="296.552" y="117.542" width="120" height="50.1099" transform="rotate(132.018 296.552 117.542)"/>
+</svg>
